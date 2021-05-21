@@ -39,6 +39,9 @@ jobs:
           
       - name: install npm dependencies
         run: npm install
+        
+      - name: install ionic-cli
+        run: npm install -g @ionic/cli
       
       - name: build ionic app
         run: |
