@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { BLE } from '@ionic-native/ble/ngx';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,22 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  devices: any[] = [];
+
+  constructor(
+    private ble:BLE,
+    private ngZone: NgZone) {}
+
+  scan(): void {
+    this.devices = [];
+    this.ble.scan([], 15).subscribe(
+      device => this.onDeviceDiscovered(device));
+  }
+
+  onDeviceDiscovered(device) {
+    this.ngZone.run(() => {
+      this.devices.push(device);
+    })
+  }
 
 }

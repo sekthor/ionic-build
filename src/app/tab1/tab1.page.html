@@ -3,15 +3,20 @@
     <ion-title>
       Tab 1
     </ion-title>
+    <ion-button (click)="scan()" slot="end">
+      <ion-icon name="Bluetooth"></ion-icon>
+      Scan
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list>
+    <ion-card-content ion-item *ngFor="let device of devices">
+      <p>{{ device.name || "unnamed" }}</p>
+      <p>{{ device.id }}</p>
+      <p>{{ device.RSSI }}</p>
+    </ion-card-content>
+  </ion-list>
 </ion-content>
